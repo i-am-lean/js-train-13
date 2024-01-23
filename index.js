@@ -419,25 +419,25 @@ function manipulateQuery(url, options) {
   const urlObj = new URL(url);
 
   // Якщо в словнику `options` є ключ `append`, то:
-  if (options.append) {
+  if (options.has("append")) {
     // Перебираємо ключі та значення в словнику `options.append` за допомогою циклу `for...of`.
-    for (const [key, value] of options.append) {
+    for (const [key, value] of options.get("append")) {
       // Додаємо кожний ключ і значення до об'єкта `searchParams` в об'єкті `urlObj`.
       urlObj.searchParams.append(key, value);
     }
   }
 
   // Якщо в словнику `options` є ключ `delete`, то:
-  if (options.delete) {
+  if (options.has("delete")) {
     // Перебираємо значення в словнику `options.delete` за допомогою циклу `for...of`.
-    for (const key of options.delete) {
+    for (const key of options.get("delete")) {
       // Видаляємо кожний ключ з об'єкта `searchParams` в об'єкті `urlObj`.
       urlObj.searchParams.delete(key);
     }
   }
 
   // Повертаємо новий URL як рядок.
-  return urlObj.toString();
+  return urlObj.href;
 }
 
 console.log("Завдання: 12 ==============================");
@@ -461,3 +461,142 @@ console.log(
   )
 );
 // Виведе: 'https://example.com/path?param3=value3&param4=value4'
+
+// Завдання 13
+
+/**
+ * Функція `getUrlData` приймає URL у вигляді рядка і повертає інформацію про URL.
+ * @url (рядок) - URL-адреса для аналізу.
+ *
+ * Функція повертає об'єкт, що містить наступні ключі:
+ * - 'origin': походження URL.
+ * - 'hostname': ім'я хоста URL.
+ * - 'port': порт URL.
+ * - 'username': ім'я користувача в URL.
+ * - 'password': пароль в URL.
+ */
+function getUrlData(url) {
+  // Створюємо новий об'єкт URL з вхідної URL-адреси.
+  const urlObj = new URL(url);
+  // Повертаємо об'єкт з відповідними даними.
+  return {
+    origin: urlObj.origin,
+    hostname: urlObj.hostname,
+    port: urlObj.port,
+    username: urlObj.username,
+    password: urlObj.password,
+  };
+}
+
+// Приклад використання функції getUrlData
+console.log("Завдання: 13 ==============================");
+console.log(getUrlData("https://username:password@example.com:8080/path"));
+// Виведе:
+// {
+//   origin: 'https://example.com:8080',
+//   hostname: 'example.com',
+//   port: '8080',
+//   username: 'username',
+//   password: 'password'
+// }
+
+// Завдання 14
+
+/**
+ * Функція `sortUrlParams` приймає URL і повертає новий URL з відсортованими пошуковими параметрами.
+//  *@url(рядок) - URL-адреса для аналізу.
+ *
+ * Функція повертає новий URL з відсортованими пошуковими параметрами за ключами у порядку зростання.
+ */
+ function sortUrlParams(url) {
+ // Створюємо новий об'єкт URL з вхідної URL-адреси.
+ let urlObj = new URL(url);
+
+ // Отримуємо масив з ключами і значеннями параметрів за допомогою методу 'entries'.
+ const entries = urlObj.searchParams.entries();
+
+ // Сортуємо масив за ключами у порядку зростання.
+ entries.sort((a, b) => a[0].localeCompare(b[0]));
+
+ // Очищуємо пошукові параметри URL.
+urlObj.searchParams.clear();
+
+ // Додаємо відсортовані параметри до URL.
+  for (let [key, value] of entries) {
+    urlObj.searchParams.append(key, value);
+  }
+
+ // Повертаємо новий URL як рядок.
+  return urlObj.toString();
+}
+
+// Приклад використання функції sortUrlParams console.log("Завдання: 14 ==============================");
+console.log(
+  sortUrlParams("https://example.com/path?param2=value2&param1=value1")
+);
+// Виведе: 'https://example.com/path?param1=value1&param2=value2'
+
+// Завдання 15
+
+/**
+ * Функція `getURLValues` приймає URL і повертає масив значень пошукових параметрів.
+ * url - URL-адреса для аналізу.
+ * Повертаємо - Масив значень пошукових параметрів.
+ */
+function getURLValues(url) {
+  // Створюємо новий об'єкт URL з вхідною URL-адресою.
+  const urlObj = new URL(url);
+
+  // Отримуємо об'єкт `URLSearchParams` з пошуковими параметрами.
+  const searchParams = urlObj.searchParams;
+
+  // Отримуємо масив ключів пошукових параметрів.
+  const keys = searchParams.keys();
+
+  // Масив для збереження значень пошукових параметрів.
+  const values = [];
+
+  // Перебираємо ключі пошукових параметрів.
+  for (const key of keys) {
+    // Отримуємо всі значення для даного ключа за допомогою методу `getAll`.
+    const value = searchParams.getAll(key);
+
+    // Додаємо значення до масиву.
+    values.push(value);
+  }
+
+  // Повертаємо масив значень пошукових параметрів.
+  return values;
+}
+
+// Приклад використання функції getURLValues
+console.log("Завдання: 15 ==============================");
+console.log(
+  getURLValues(
+    "https://example.com/path?param1=value1&param2=value2&param3=value3"
+  )
+);
+
+// Завдання 16
+
+/**
+ * Функція `getUrlKeys` приймає URL і повертає масив з ключами пошукових параметрів.
+ * @url (рядок) - URL-адреса для аналізу.
+ *
+ * Функція повертає масив, що містить усі ключі пошукових параметрів.
+ */
+function getUrlKeys(url) {
+  // Створюємо новий об'єкт URL з вхідної URL-адреси.
+  const urlObj = new URL(url);
+
+  // Отримуємо масив зі всіма ключами пошукових параметрів за допомогою методу 'keys'.
+  const keys = urlObj.searchParams.keys();
+
+  // Повертаємо масив з ключами.
+  return keys;
+}
+
+// Приклад використання функції getUrlKeys
+console.log("Завдання: 16 ==============================");
+console.log(getUrlKeys("https://example.com/path?param1=value1&param2=value2"));
+// Виведе: [ 'param1', 'param2' ]

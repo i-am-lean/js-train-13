@@ -34,78 +34,6 @@ console.log(
 
 
 
-// Завдання 12
-/**
- * Функція `manipulateQuery` отримує URL та словник з додатковими налаштуваннями та працює над пошуковими параметрами URL.
- *
- * url - URL для обробки.
- * options - Словник з налаштуваннями. Включає ключі `append` та `delete`.
- *
- * Повертається - Новий URL з модифікованими пошуковими параметрами.
- */
-function manipulateQuery(url, options) {
-  // Створюємо новий об'єкт URL з вхідної URL-адреси.
-  // Якщо в словнику `options` є ключ `append`...
-  // ...перебираємо його ключі та значення за допомогою циклу for...of.
-  // Додаємо кожний ключ і значення до об'єкта `searchParams` в URL.
-  // Якщо в словнику `options` є ключ `delete`...
-  // ...перебираємо його значення за допомогою циклу for...of.
-  // Видаляємо кожний ключ з об'єкта `searchParams` в URL.
-  // Повертаємо новий URL як рядок.
-}
-
-console.log("Завдання: 12 ==============================");
-
-// Приклад використання функції manipulateQuery
-let options = new Map([
-  [
-    "append",
-    new Map([
-      ["param3", "value3"],
-      ["param4", "value4"],
-    ]),
-  ],
-  ["delete", ["param1", "param2"]],
-]);
-
-console.log(
-  manipulateQuery(
-    "https://example.com/path?param1=value1&param2=value2",
-    options
-  )
-);
-// Виведе: 'https://example.com/path?param3=value3&param4=value4'
-
-// Завдання 13
-
-/**
- * Функція `getUrlData` приймає URL у вигляді рядка і повертає інформацію про URL.
- * @url (рядок) - URL-адреса для аналізу.
- *
- * Функція повертає об'єкт, що містить наступні ключі:
- * - 'origin': походження URL.
- * - 'hostname': ім'я хоста URL.
- * - 'port': порт URL.
- * - 'username': ім'я користувача в URL.
- * - 'password': пароль в URL.
- */
-function getUrlData(url) {
-  // Створюємо новий об'єкт URL з вхідної URL-адреси.
-  // Повертаємо об'єкт з відповідними даними.
-}
-
-// Приклад використання функції getUrlData
-console.log("Завдання: 13 ==============================");
-console.log(getUrlData("https://username:password@example.com:8080/path"));
-// Виведе:
-// {
-//   origin: 'https://example.com:8080',
-//   hostname: 'example.com',
-//   port: '8080',
-//   username: 'username',
-//   password: 'password'
-// }
-
 // Завдання 14
 
 /**
@@ -130,31 +58,7 @@ console.log(
 );
 // Виведе: 'https://example.com/path?param1=value1&param2=value2'
 
-// Завдання 15
 
-/**
- * Функція `getURLValues` приймає URL і повертає масив значень пошукових параметрів.
- * url - URL-адреса для аналізу.
- * Повертаємо - Масив значень пошукових параметрів.
- */
-function getURLValues(url) {
-  // Створюємо новий об'єкт URL з вхідною URL-адресою.
-  // Отримуємо об'єкт `URLSearchParams` з пошуковими параметрами.
-  // Отримуємо масив ключів пошукових параметрів.
-  // Масив для збереження значень пошукових параметрів.
-  // Перебираємо ключі пошукових параметрів.
-  // Отримуємо всі значення для даного ключа за допомогою методу `getAll`.
-  // Додаємо значення до масиву.
-  // Повертаємо масив значень пошукових параметрів.
-}
-
-// Приклад використання функції getURLValues
-console.log("Завдання: 15 ==============================");
-console.log(
-  getURLValues(
-    "https://example.com/path?param1=value1&param2=value2&param3=value3"
-  )
-);
 
 // Завдання 16
 
