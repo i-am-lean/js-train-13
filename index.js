@@ -513,21 +513,21 @@ console.log(getUrlData("https://username:password@example.com:8080/path"));
  let urlObj = new URL(url);
 
  // Отримуємо масив з ключами і значеннями параметрів за допомогою методу 'entries'.
- const entries = urlObj.searchParams.entries();
+ let paramsArray = Array.from(urlObj.searchParams.entries());
 
  // Сортуємо масив за ключами у порядку зростання.
- entries.sort((a, b) => a[0].localeCompare(b[0]));
+ paramsArray.sort((a, b) => a[0] - b[0]);
 
  // Очищуємо пошукові параметри URL.
-urlObj.searchParams.clear();
+urlObj.search = "";
 
  // Додаємо відсортовані параметри до URL.
-  for (let [key, value] of entries) {
+  paramsArray.forEach (([key, value]) => {
     urlObj.searchParams.append(key, value);
-  }
+  });
 
  // Повертаємо новий URL як рядок.
-  return urlObj.toString();
+  return urlObj.href;
 }
 
 // Приклад використання функції sortUrlParams console.log("Завдання: 14 ==============================");
